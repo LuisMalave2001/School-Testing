@@ -17,9 +17,14 @@
         <field name="school_id" ref="my_school"/>
     </record>
 
+    <record id="my_year_period" model="school.period.category">
+      <field name="name">Year</field>
+    </record>
+
     <record id="my_period" model="school.period">
         <field name="name">My Period</field>
         <field name="program_id" ref="my_program"/>
+        <field name="category_id" ref="my_year_category"/>
     </record>
 
     <record id="my_grade_level" model="school.grade.level">
