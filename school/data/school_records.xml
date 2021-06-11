@@ -17,7 +17,7 @@
         <field name="school_id" ref="my_school"/>
     </record>
 
-    <record id="my_year_period" model="school.period.category">
+    <record id="my_year_category" model="school.period.category">
       <field name="name">Year</field>
     </record>
 
