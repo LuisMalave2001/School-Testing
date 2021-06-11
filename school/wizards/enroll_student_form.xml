@@ -77,12 +77,11 @@
           </group>
           <group attrs="{'invisible': [('state', '!=', '3')]}" >
             <field name="family_edit_relationship_id" domain="[('id', 'in', family_ids)]"/>
-            <field name="filtered_family_relationship_ids" domain="[('family_id', '=', family_edit_relationship_id)]">
+            <field name="family_relationship_ids" domain="[('family_id', '=', family_edit_relationship_id)]">
               <tree editable="bottom">
                 <field name="family_id" />
-                <field name="form_student_ids" invisible="1" />
-                <field name="individual_id" readonly="1" 
-                    domain="[('id', 'in', form_student_ids)]"/>
+<!--                <field name="form_student_ids" invisible="1" />-->
+                <field name="individual_id" readonly="1" />
                 <field name="family_individual_ids" invisible="1" />
                 <field name="individual_relation_id" readonly="1" 
                     domain="[('id', 'in', family_individual_ids)]" />

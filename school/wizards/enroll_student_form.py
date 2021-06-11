@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 import logging
 logger = logging.getLogger(__name__)
 
@@ -66,7 +66,6 @@ class EnrollStudentForm(models.TransientModel):
 
     def enroll(self):
         self.ensure_one()
-
         # Create associate to family
         # For now, the families are already created...
 
@@ -78,16 +77,32 @@ class EnrollStudentForm(models.TransientModel):
 
         # Create relationships
         self.family_ids.compute_individual_relationships()
-        for family in self.family_ids():
-            for form_student in self.students:
-                student = form_student.create_students(family_ids=family)
+        for family in self.family_ids:
+            for form_student in self.student_ids:
                 for individual in self.family_ids.no_student_ids:
                     form_relation = self.family_relationship_ids \
                             .filtered(lambda rel: 
                                       rel.individual_id == form_student
                                       and rel.individual_relation_id == individual
                                       and rel.family_id == family)
-                    print(form_relation)
+
+        action = {
+            'type': 'ir.actions.act_window',
+            'name': _("New students"),
+            'res_model': 'school.student',
+            'target': 'main',
+        }
+        if len(students) == 1:
+            action.update({
+                'view_mode': 'form',
+                'res_id': students.id,
+            })
+        else:
+            action.update({
+                'view_mode': 'kanban,form',
+                'domain': [('id', 'in', students.ids)],
+            })
+        return action
 
 
 class EnrollStudentFormStudent(models.TransientModel):
@@ -138,10 +153,11 @@ class EnrollStudentFormStudent(models.TransientModel):
             'email': self.email,
             'email2': self.email2,
             'enrollment_history_ids': [(0, 0, {
+                'note': "Enrolled by automatic wizard by %s" % self.env.user.name,
                 'school_id': setting.school_id.id,
                 'program_id': setting.program_id.id,
-                'grade_level_id': setting.program_id.id,
-                'status_id': setting.status_id.id,
+                'grade_level_id': setting.grade_level_id.id,
+                'enrollment_status_id': setting.status_id.id,
                 }) for setting in self.program_setting_ids]
             }
 
@@ -156,6 +172,8 @@ class EnrollStudentFormStudent(models.TransientModel):
                     family.write({
                         'individual_ids': [(4, student.individual_id.id, False)]
                     })
+            students += student
+        return students
 
 
 class EnrollStudentFormProgramSettings(models.TransientModel):
