@@ -45,7 +45,6 @@
     <field name="course_id" ref="my_course"/>
   </record>
 
-  <!-- Relationship types -->
   <record id="relationship_parent" model="school.family.individual.relationship.type">
     <field name="name">Parent</field>
     <field name="type">parent</field>
