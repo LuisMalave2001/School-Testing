@@ -22,6 +22,7 @@
         'portal',
         'contacts',
         'hr_skills',
+        'calendar',
         ],
 
     # always loaded
@@ -59,6 +60,7 @@
 
         # Wizards
         'wizards/enroll_student_form.xml',
+        'wizards/generate_class_event_wizard.xml',
         ],
 
     'qweb': [

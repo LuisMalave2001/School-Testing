@@ -16,10 +16,14 @@ class SchoolCourseRequiredSkill(models.Model):
     skill_level_id = fields.Many2one('hr.skill.level', required=True, string="Minimum skill level")
     level_progress = fields.Integer(related='skill_level_id.level_progress')
 
+
 class SchoolClass(models.Model):
     _name = 'school.course'
+    _description = 'School courses'
 
-    name = fields.Char()
+    name = fields.Char(required=True, translate=True)
+    abbreviation = fields.Char(required=True, translate=True)
+    description = fields.Text(translate=True)
     program_ids = fields.Many2many(
         'school.program',
         relation="course_program_relation",

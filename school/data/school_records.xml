@@ -35,15 +35,16 @@
   <!-- Courses & classes -->
   <record id="my_course" model="school.course">
     <field name="name">My Course</field>
+    <field name="abbreviation">M-CRS</field>
     <field name="program_ids" eval="[(4, ref('my_program'))]"/>
   </record>
 
   <record id="my_class" model="school.class">
     <field name="name">My Class</field>
+    <field name="abbreviation">M-CLSS</field>
     <field name="course_id" ref="my_course"/>
   </record>
 
-  <!-- Relationshi types -->
   <record id="relationship_parent" model="school.family.individual.relationship.type">
     <field name="name">Parent</field>
     <field name="type">parent</field>

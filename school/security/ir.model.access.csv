@@ -13,6 +13,9 @@ school_rel_class_period_access,school_rel_class_period_access,school.model_schoo
 school_course_required_skill_access,school_course_required_skill_access,school.model_school_course_required_skill,,1,1,1,1
 school_class_access,school_class_access,school.model_school_class,,1,1,1,1
 
+school_class_event_setup_access,school_class_event_setup_access,school.model_school_class_event_setup,,1,1,1,1
+school_class_event_setup_range_access,school_class_event_setup_range_access,school.model_school_class_event_setup_range,,1,1,1,1
+
 school_allergy_access,school_allergy_access,school.model_school_allergy,,1,1,1,1
 
 school_condition_access,school_condition_access,school.model_school_condition,,1,1,1,1
